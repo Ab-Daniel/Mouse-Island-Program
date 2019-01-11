@@ -6,32 +6,53 @@ public class Island
 	public void printIsland()
 	{
 		
-		for (int i = 0; i < ROWS-1; i++)
-		{
-	         for (int j = 0; j < COLUMNS-1; j++)
+	    String r = "";
+		for (int i = 0; i < ROWS; i++)
+	         for (int j = 0; j < COLUMNS; j++)
 	         {
-	        	 if((i>1&&i<=14)&&(j>1&&j<=14))
-	        	 {
-	        		 island[i][j] = 0;
-	        	 }
 	        	 
+	        	int randInt;
+	        		
+	        	int checkX = generator.nextInt(9);
+	        	int checkY = generator.nextInt(14);
+	        	
+	        	if(checkX > 0 && checkY > 0)
+	        	{
+	        		island[checkX][checkY] = 0;
+	        	}
+	        	
+	        	if(checkX == 0 || checkY == 0)
+	        	{
+	        		
+	        		randInt = generator.nextInt(100);
+	        		if(randInt<=PERCENT_BRIDGES)
+	        		{
+	        			island[checkX][checkY] = 0;
+	        		}
+	        		if(randInt>=PERCENT_BRIDGES)
+	        		{
+	        			island[checkX][checkY] = -1;
+	        		}
+	        		
+	        	}
+	        	
 	         }
-	         
-		}
+		
+		
 		
 	}
 	
 	public String moveAbout()
 	{
 		
-		
+		return null;
 		
 	}
 	
 	final int PERCENT_BRIDGES = 30;
 	
-	final int ROWS = 10;
-	final int COLUMNS = 15;
+	final int ROWS = 9;
+	final int COLUMNS = 14;
 	
 	int[][] island = new int[ROWS][COLUMNS];
 	
