@@ -10,16 +10,20 @@ public class Island
 		for (int i = 0; i < ROWS; i++)
 		{
 			
-			r = r + "";
+			//r = r + "";
 	         for (int j = 0; j < COLUMNS; j++)
 	         {
 	        	 
-	        	int randInt;
-	        		
+	        	int randInt = generator.nextInt(100);
+	        	if(randInt <= PERCENT_BRIDGES)
+	        	{
+	        		island[j][0] = 0;
+	        	}
+	        	
+	        	
+	        	/*
 	        	int checkX = generator.nextInt(9);
 	        	int checkY = generator.nextInt(14);
-	        	
-	        	//r = r + island[checkX][checkY];
 	        	
 	        	if(checkX > 0 && checkY > 0)
 	        	{
@@ -28,7 +32,7 @@ public class Island
 	        		
 	        	}
 	        	
-	        	if(checkX == 0 || checkY == 0)
+	        	else if(checkX == 0 || checkX == 9 || checkY == 0 || checkY == 14)
 	        	{
 	        		
 	        		randInt = generator.nextInt(100);
@@ -38,7 +42,7 @@ public class Island
 	        			r = r + island[checkX][checkY];
 		        		
 	        		}
-	        		else// if(randInt>PERCENT_BRIDGES)
+	        		else
 	        		{
 	        			island[checkX][checkY] = -1;
 	        			r = r + island[checkX][checkY];
@@ -46,6 +50,7 @@ public class Island
 	        		}
 	        		
 	        	}
+	        	*/
 	        	
 	        	//r = r + island[checkX][checkY];
 	        	
