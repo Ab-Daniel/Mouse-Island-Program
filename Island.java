@@ -3,11 +3,14 @@ import java.util.Random;
 public class Island 
 {
 	
-	public void printIsland()
+	public String printIsland()
 	{
 		
 	    String r = "";
 		for (int i = 0; i < ROWS; i++)
+		{
+			
+			r = r + "";
 	         for (int j = 0; j < COLUMNS; j++)
 	         {
 	        	 
@@ -16,9 +19,13 @@ public class Island
 	        	int checkX = generator.nextInt(9);
 	        	int checkY = generator.nextInt(14);
 	        	
+	        	//r = r + island[checkX][checkY];
+	        	
 	        	if(checkX > 0 && checkY > 0)
 	        	{
 	        		island[checkX][checkY] = 0;
+	        		r = r + island[checkX][checkY];
+	        		
 	        	}
 	        	
 	        	if(checkX == 0 || checkY == 0)
@@ -28,17 +35,27 @@ public class Island
 	        		if(randInt<=PERCENT_BRIDGES)
 	        		{
 	        			island[checkX][checkY] = 0;
+	        			r = r + island[checkX][checkY];
+		        		
 	        		}
-	        		if(randInt>=PERCENT_BRIDGES)
+	        		else// if(randInt>PERCENT_BRIDGES)
 	        		{
 	        			island[checkX][checkY] = -1;
+	        			r = r + island[checkX][checkY];
+		        		
 	        		}
 	        		
 	        	}
 	        	
+	        	//r = r + island[checkX][checkY];
+	        	
 	         }
 		
+	         r = r + "\n";
+	         
+		}
 		
+		return r;
 		
 	}
 	
@@ -51,8 +68,8 @@ public class Island
 	
 	final int PERCENT_BRIDGES = 30;
 	
-	final int ROWS = 9;
-	final int COLUMNS = 14;
+	final int ROWS = 10;
+	final int COLUMNS = 15;
 	
 	int[][] island = new int[ROWS][COLUMNS];
 	
@@ -61,6 +78,6 @@ public class Island
 	
 	private int moves;
 	
-	private Random generator;
+	private Random generator = new Random();
 	
 }
