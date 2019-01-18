@@ -7,8 +7,6 @@ public class IslandTest
 		
 		Island island = new Island();
 		
-		System.out.println(island.printIsland());
-		
 	}
 	
 }
