@@ -2,7 +2,10 @@ import java.util.Random;
 
 public class Island 
 {
-	public Island(){
+	public Island()
+	{
+		
+		
 		
 		//1 loop and inside thos loops u ned 5 if staments
 		
@@ -44,13 +47,13 @@ public class Island
 		
 		
 		printIsland();
+		//moveAbout();
 		
 	}
 	
 	public void printIsland()
 	{
 		
-	    String r = "";
 		for (int i = 0; i < ROWS; i++)
 		{
 			
@@ -125,12 +128,12 @@ public class Island
 	         
 	         
 	        System.out.println();
-		
+	        moveAbout();
 	         //r = r + "\n";
 	         
 		}
 		
-		//System.out.println();
+		System.out.println(moveAbout());
 		
 	}
 	
@@ -146,12 +149,183 @@ public class Island
 	public String moveAbout()
 	{
 		
+		//String r;
+		
 		boolean searching = true;
 		boolean escaped = false;
 		boolean drowned = false;
 		boolean starved = false;
 		
+		boolean mouseState = searching;
 		
+		int y = generator.nextInt(7) + 1;
+		int x = generator.nextInt(12) + 1;
+		
+		//int mousePos = island[x][y];
+		
+		while(mouseState == searching)
+		{
+			
+			if(moves<50 && x != 0 && x != 14 && y != 0 && y != 9)
+			{
+				
+				int direction = generator.nextInt(3) + 1;
+				
+				if(direction == 1)
+				{
+					island[x][y-1] = moves;
+					
+					if(x==0 || x==14 || y==0 || y==9)
+					{
+						
+						if(island[x][y] == -1)
+						{
+							mouseState = drowned;
+							return "Drowned";
+						}
+						
+						if(island[x][y] == 0)
+						{
+							mouseState = escaped;
+							return "Escaped";
+						}
+						
+					}
+					
+					//mousePos = island[x][y-1];
+					
+					//y=y-1;
+				}
+				
+				if(direction == 2)
+				{
+					island[x+1][y] = moves;
+					
+					if(x==0 || x==14 || y==0 || y==9)
+					{
+						
+						if(island[x][y] == -1)
+						{
+							mouseState = drowned;
+							return "Drowned";
+						}
+						
+						if(island[x][y] == 0)
+						{
+							mouseState = escaped;
+							return "Escaped";
+						}
+						
+					}
+					
+					//mousePos = island[x][y];
+					//x=x+1;
+				}
+				
+				if(direction == 3)
+				{
+					island[x][y+1] = moves;
+					
+					if(x==0 || x==14 || y==0 || y==9)
+					{
+						
+						if(island[x][y] == -1)
+						{
+							mouseState = drowned;
+							return "Drowned";
+						}
+						
+						if(island[x][y] == 0)
+						{
+							mouseState = escaped;
+							return "Escaped";
+						}
+						
+					}
+					
+					//mousePos = island[x][y];
+					//y=y+1;
+				}
+				
+				if(direction == 4)
+				{
+					island[x-1][y] = moves;
+					
+					if(x==0 || x==14 || y==0 || y==9)
+					{
+						
+						if(island[x][y] == -1)
+						{
+							mouseState = drowned;
+							return "Drowned";
+						}
+						
+						if(island[x][y] == 0)
+						{
+							mouseState = escaped;
+							return "Escaped";
+						}
+						
+					}
+					
+					//mousePos = island[x][y];
+					//x=x-1;
+				}
+				
+			}
+			
+			/*
+			else if (moves == island[0][y] || moves == island[14][y] || moves == island[x][0] || moves == island[x][9]) (x==0 || x==14 || y==0 || y==9)
+			{
+				
+				if(island[x][y] == -1)
+				{
+					mouseState = drowned;
+					return "Drowned";
+				}
+				
+				else if(island[x][y] == 0)
+				{
+					mouseState = escaped;
+					return "Escaped";
+				}
+				
+			}
+			*/
+			
+			else if(moves>50)
+			{
+				
+				if(x != 0 && x != 14 && y != 0 && y != 9)
+				{
+					
+					mouseState = starved;
+					return "Starved";
+					
+				}
+				
+				if(x==0 || x==14 || y==0 || y==9)
+				{
+					
+					if(island[x][y] == -1)
+					{
+						mouseState = drowned;
+						return "Drowned";
+					}
+					
+					if(island[x][y] == 0)
+					{
+						mouseState = escaped;
+						return "Escaped";
+					}
+					
+				}
+				
+			}
+			
+			moves++;
+			
+		}
 		
 		return null;
 		
@@ -167,7 +341,7 @@ public class Island
 	private int mCol;
 	private int mRow;
 	
-	private int moves;
+	private int moves = 0;
 	
 	private Random generator = new Random();
 	
