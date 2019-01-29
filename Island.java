@@ -65,76 +65,38 @@ public class Island
 	        	 
 	        	 if(i == 0 || i == 9 || j == 0 || j == 14)
 	        	 {
-	        		 if(j == 0 && (i!=0 && i!=9))
-	        		 {
-	        			 
-	        			 if(island[i][j] == -1)
-		        		 {
-		        			 
-		        			 System.out.print(" W");	        			 
-		        		 }
-		        		 if(island[i][j] == 0)
-		        		 {
-		        			 
-		        			 System.out.print(" B");
-		        			 
-		        		 }
-	        			 
-	        		 }
-	        		 
-	        		 else if (j == 14 && (i!=0 && i!=9))
-	        		 {
-	        			 
-	        			 if(island[i][j] == -1)
+	        		if(island[i][j] == -1)
 		        		 {
 		        			 
 		        			 System.out.print("  W");	        			 
 		        		 }
-		        		 if(island[i][j] == 0)
+	        		else if(island[i][j] == 0)
+	        			
 		        		 {
 		        			 
 		        			 System.out.print("  B");
 		        			 
 		        		 }
 	        			 
-	        		 }
 	        		 
-	        		 else
-	        		 {
-	        			
-	        			 if(island[i][j] == -1)
-		        		 {
-		        			 
-		        			 System.out.print(" W ");	        			 
-		        		 }
-		        		 if(island[i][j] == 0)
-		        		 {
-		        			 
-		        			 System.out.print(" B ");
-		        			 
-		        		 }
-	        			 
-	        		 }
-	        		 
+	        	 
 	        		 
 	        		 continue;
-	        	 }
 	        	 
+	        	 }
 	        	 
 	        	 
 	        	 System.out.print(String.format("%3d", island[i][j]));
 	        	 
 	         }
-	         
-	         
-	        System.out.println();
 	        moveAbout();
+	        System.out.println();
 	         //r = r + "\n";
 	         
 		}
 		
 		System.out.println(moveAbout());
-		
+		System.out.println();
 	}
 	
 	
@@ -150,184 +112,97 @@ public class Island
 	{
 		
 		//String r;
+	
 		
-		boolean searching = true;
-		boolean escaped = false;
-		boolean drowned = false;
-		boolean starved = false;
-		
-		boolean mouseState = searching;
-		
-		int y = generator.nextInt(7) + 1;
-		int x = generator.nextInt(12) + 1;
+		int y = 7;
+		int x = 4;
 		
 		//int mousePos = island[x][y];
 		
-		while(mouseState == searching)
+		
+		for(int i = 0; i < 50; i++)
 		{
+			int direction = generator.nextInt(3) + 1;
+
 			
-			if(moves<50 && x != 0 && x != 14 && y != 0 && y != 9)
+			if(moves < 50)
 			{
 				
-				int direction = generator.nextInt(3) + 1;
 				
-				if(direction == 1)
-				{
-					island[x][y-1] = moves;
+			if(!(x == 0 || x == 9 || y == 0 || y == 14))
+			{
 					
-					if(x==0 || x==14 || y==0 || y==9)
-					{
-						
-						if(island[x][y] == -1)
-						{
-							mouseState = drowned;
-							return "Drowned";
-						}
-						
-						if(island[x][y] == 0)
-						{
-							mouseState = escaped;
-							return "Escaped";
-						}
-						
-					}
+				
+			
+				if(direction == 1 )
+				{
+					island[x][y] = moves;
+					x++;
+					
 					
 					//mousePos = island[x][y-1];
 					
 					//y=y-1;
 				}
 				
-				if(direction == 2)
+				else if(direction == 2)
 				{
-					island[x+1][y] = moves;
-					
-					if(x==0 || x==14 || y==0 || y==9)
-					{
-						
-						if(island[x][y] == -1)
-						{
-							mouseState = drowned;
-							return "Drowned";
-						}
-						
-						if(island[x][y] == 0)
-						{
-							mouseState = escaped;
-							return "Escaped";
-						}
-						
-					}
+					island[x][y] = moves;
+					y++;
 					
 					//mousePos = island[x][y];
 					//x=x+1;
 				}
 				
-				if(direction == 3)
+				else if(direction == 3)
 				{
-					island[x][y+1] = moves;
+					island[x][y] = moves;
+					x--;
 					
-					if(x==0 || x==14 || y==0 || y==9)
-					{
-						
-						if(island[x][y] == -1)
-						{
-							mouseState = drowned;
-							return "Drowned";
-						}
-						
-						if(island[x][y] == 0)
-						{
-							mouseState = escaped;
-							return "Escaped";
-						}
-						
-					}
 					
 					//mousePos = island[x][y];
 					//y=y+1;
 				}
 				
-				if(direction == 4)
+				else if(direction == 4)
 				{
-					island[x-1][y] = moves;
-					
-					if(x==0 || x==14 || y==0 || y==9)
-					{
-						
-						if(island[x][y] == -1)
-						{
-							mouseState = drowned;
-							return "Drowned";
-						}
-						
-						if(island[x][y] == 0)
-						{
-							mouseState = escaped;
-							return "Escaped";
-						}
-						
-					}
-					
+					island[x][y] = moves;
+					y--;
 					//mousePos = island[x][y];
 					//x=x-1;
 				}
 				
 			}
+				moves++;
+			}
 			
-			/*
-			else if (moves == island[0][y] || moves == island[14][y] || moves == island[x][0] || moves == island[x][9]) (x==0 || x==14 || y==0 || y==9)
-			{
+		 if((x==0 || x==9 || y==0 || y==14) && moves < 50){
 				
 				if(island[x][y] == -1)
 				{
-					mouseState = drowned;
-					return "Drowned";
+					return "Drowned " + moves;
+					
 				}
 				
-				else if(island[x][y] == 0)
+				if(island[x][y] == 0)
 				{
-					mouseState = escaped;
-					return "Escaped";
+					return "Escaped " + moves;
 				}
 				
+				moves = 8888;
 			}
-			*/
-			
-			else if(moves>50)
-			{
-				
-				if(x != 0 && x != 14 && y != 0 && y != 9)
-				{
-					
-					mouseState = starved;
-					return "Starved";
-					
-				}
-				
-				if(x==0 || x==14 || y==0 || y==9)
-				{
-					
-					if(island[x][y] == -1)
-					{
-						mouseState = drowned;
-						return "Drowned";
-					}
-					
-					if(island[x][y] == 0)
-					{
-						mouseState = escaped;
-						return "Escaped";
-					}
-					
-				}
+		 
+		 else if(moves>=50)
+		{
+				moves = 0;
+				return "Straved " + moves;
 				
 			}
 			
-			moves++;
 			
 		}
 		
-		return null;
+		return "FAIL";
 		
 	}
 	
