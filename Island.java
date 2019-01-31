@@ -89,9 +89,8 @@ public class Island
 	        	 System.out.print(String.format("%3d", island[i][j]));
 	        	 
 	         }
-	        moveAbout();
-	        System.out.println();
-	         //r = r + "\n";
+	        System.out.println(" "+moveAbout() );
+	         
 	         
 		}
 		
@@ -119,16 +118,17 @@ public class Island
 		
 		//int mousePos = island[x][y];
 		
+		moves = 0;
+		
+		//mouseCheck = false;
 		
 		for(int i = 0; i < 50; i++)
 		{
-			int direction = generator.nextInt(3) + 1;
-
+			int direction = generator.nextInt(3);
+			direction++;
 			
-			if(moves < 50)
-			{
-				
-				
+		if(moves < 50)
+		{				
 			if(!(x == 0 || x == 9 || y == 0 || y == 14))
 			{
 					
@@ -176,35 +176,46 @@ public class Island
 				moves++;
 			}
 			
-		 if((x==0 || x==9 || y==0 || y==14) && moves < 50){
+		 if((x==0 || x==9 || y==0 || y==14)){
 				
 				if(island[x][y] == -1)
 				{
 					return "Drowned " + moves;
-					
+					//break;
 				}
 				
 				if(island[x][y] == 0)
 				{
 					return "Escaped " + moves;
+					//break;
 				}
 				
-				moves = 8888;
+				break;
 			}
 		 
 		 else if(moves>=50)
-		{
-				moves = 0;
-				return "Straved " + moves;
-				
-			}
-			
+		{	
+			return "Starved";
+					
+					
+				}
+		 
+		 
 			
 		}
+		
+			
+		 
 		
 		return "FAIL";
 		
 	}
+	public void printStats(int x, int y, int z){
+		System.out.println("escapes: " + x);
+		System.out.println("drowns: " + y);
+		System.out.println("starves: " + z);
+	}
+	//private boolean mouseCheck;
 	
 	final int PERCENT_BRIDGES = 30;
 	
@@ -213,10 +224,7 @@ public class Island
 	
 	int[][] island = new int[ROWS][COLUMNS];
 	
-	private int mCol;
-	private int mRow;
-	
-	private int moves = 0;
+	private int moves;
 	
 	private Random generator = new Random();
 	
